@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">KDF</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- navigation drawer items title -->
+    <string-array name="NavItems">
+        <item>Home</item>
+        <item>Notices</item>
+        <item>Contact</item>
+        <item>Memo</item>
+        <item>About Us</item>
+    </string-array>
+
+
+    <!-- Nav Drawer List Item Icons -->
+    <string-array name="NavIcons">
+        <item>@drawable/ic_home_black_24dp</item>
+        <item>@drawable/ic_info_black_24dp</item>
+        <item>@drawable/ic_contacts_black_24dp</item>
+        <item>@drawable/ic_note_add_black_24dp</item>
+        <item>@drawable/ic_group_black_24dp</item>
+
+    </string-array>
+
+    <string name="kdf_text_nepali">sf]O/fnf 8]enKd]G6 kmfp08]zg </string>
+    <string name="kdf_text_english">Koirala Development Foundation</string>
+    <string name="kdf_intro">kl/ro M   </string>
+    <string name="kdf_intro_description"></string>
+    <string name="kdf_organisation">;+:yfsf] sfof{no M </string>
+    <string name="kdf_organisation_description"></string>
+    <string name="kdf_objective">;+:yfsf] cl:tTj tyf pb]Zox?  M </string>
+    <string name="kdf_objective_description"></string>
+    <string name="kdf_membership">;+:yfsf] ;b:otf k|flKtsf] nflu cfjZos of]Uotf M </string>
+    <string name="kdf_membership_description"></string>
+    <string name="kdf_general">sfo{ ;ldltsf] u7g M  </string>
+    <string name="kdf_general_description"></string>
+    <string name="kdf_central_board">s]Gb|Lo sfo{ ;ldlt M</string>
+    <string name="kdf_central_board_description"></string>
+
+    <string name="developer_a">Amrit Khatiwada</string>
+    <string name="developer_b">Bijay Dulal</string>
+    <string name="developer_c">Abhishek Koirala</string>
+
+    <string name="developer_phone_a"></string>
+    <string name="developer_phone_b"></string>
+    <string name="developer_phone_c">+9779849282281</string>
+
+
+    <string name="developer_email_a">amrit008@gmail.com</string>
+    <string name="developer_email_b">yesbijay@gmail.com</string>
+    <string name="developer_email_c">readeravskh@gmail.com</string>
+
+</resources>

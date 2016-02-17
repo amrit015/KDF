@@ -10,8 +10,12 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,16 +31,21 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
     ListView listView;
     DatabaseHelper dbHelper = null;
     ArrayList<MembersModule> memberList = new ArrayList<MembersModule>();
-    ;
     CustomAdapter adapter;
     InputStream assets_path;
     File folder;
+    LinearLayout resultsLayout;
+    TextView resultsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contacts_listview);
         listView = (ListView) findViewById(R.id.listview);
+        resultsLayout = (LinearLayout) findViewById(R.id.results_layout);
+        resultsText = (TextView) findViewById(R.id.results_search);
+        resultsText.setText("Search by entering Names");
+        resultsLayout.setVisibility(View.VISIBLE);
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Database");
         folder.mkdirs();
         try {
@@ -69,7 +78,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        String queryObtained = query.toLowerCase().toString();
+        String queryObtained = query.toLowerCase().replace(" ","").toString();
         Log.i(TAG, "Obtained Query : " + queryObtained);
         //hiding keyboard after the user enters query for search
         ((InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE))
@@ -86,6 +95,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
     }
 
     private void getData(String queryObtained) {
+        resultsLayout.setVisibility(View.GONE);
         String a = queryObtained;
         //getting data from data in asset folder and inserting in array
         ArrayList<MembersModule> list = dbHelper.getMembersModule();
@@ -110,7 +120,11 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
                 Log.i(TAG, "search list: " + memberList);
             }
         }
-        adapter = new CustomAdapter(this, memberList);
-        listView.setAdapter(adapter);
+        if (memberList.size() > 0) {
+            adapter = new CustomAdapter(this, memberList);
+            listView.setAdapter(adapter);
+        } else {
+            Toast.makeText(getApplicationContext(), "No results found", Toast.LENGTH_SHORT).show();
+        }
     }
 }

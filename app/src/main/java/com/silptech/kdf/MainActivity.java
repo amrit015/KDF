@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //pushbots library initialization
         Pushbots.sharedInstance().init(this);
         //setting up titles for drawers
         mTitle = mDrawerTitle = getTitle();
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             StatusBarColor.StatusBarColorChange(this);
         }
         //defining drawer items
-        /*  drawerItemsArray = new String[]{"Search University", "Selection Guide", "Application Processing"}; */
+        /*  drawerItemsArray = new String[]{"Home", "Notices", "Contact","Memo","About Us"}; */
         drawerItemsArray = getResources().getStringArray(R.array.NavItems);
 
         // defining drawers icons

@@ -12,7 +12,9 @@ public class AboutUsFragment extends android.support.v4.app.Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_fragment, container, false);
+        View view = inflater.inflate(R.layout.layout_about_us, container, false);
+
+
         return view;
     }
 }

@@ -77,15 +77,15 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
     }
 
-    public void addItem(NoticesModule dataObj, int index) {
-        mDataset.add(index, dataObj);
-        notifyItemInserted(index);
-    }
-
-    public void deleteItem(int index) {
-        mDataset.remove(index);
-        notifyItemRemoved(index);
-    }
+//    public void addItem(NoticesModule dataObj, int index) {
+//        mDataset.add(index, dataObj);
+//        notifyItemInserted(index);
+//    }
+//
+//    public void deleteItem(int index) {
+//        mDataset.remove(index);
+//        notifyItemRemoved(index);
+//    }
 
     @Override
     public int getItemCount() {

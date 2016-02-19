@@ -24,13 +24,13 @@ public class NotesAddActivity extends AppCompatActivity {
     String notesTitleText;
     String notesContentText;
     File folder;
-    DatabaseNotes db;
+    DatabaseHelperNotes db;
     CacheModule CacheModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_add_notes);
+        setContentView(R.layout.activity_add_notes);
         notesTitle = (EditText) findViewById(R.id.memo_add_title);
         notesContent = (EditText) findViewById(R.id.memo_add_contents);
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notes");
@@ -87,7 +87,7 @@ public class NotesAddActivity extends AppCompatActivity {
 
     private void onSavedNote() {
         if ((notesTitleText.length() > 0) && (notesContentText.length() > 0)) {
-            db = new DatabaseNotes(folder, getApplicationContext());
+            db = new DatabaseHelperNotes(folder, getApplicationContext());
             CacheModule = new CacheModule();
             CacheModule.title = notesTitleText;
             CacheModule.notes = notesContentText;

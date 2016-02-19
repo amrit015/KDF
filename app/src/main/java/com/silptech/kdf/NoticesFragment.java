@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.silptech.kdf.Utils.CacheNotification;
 import com.silptech.kdf.Utils.InternetCheck;
+import com.silptech.kdf.Utils.XMLParser;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

@@ -8,9 +8,9 @@
     <string-array name="NavItems">
         <item>Home</item>
         <item>Notices</item>
-        <item>Contact</item>
+        <item>Members</item>
         <item>Notes</item>
-        <item>About Us</item>
+        <item>Contact Us</item>
     </string-array>
 
 
@@ -51,5 +51,28 @@
     <string name="developer_email_a">amrit008@gmail.com</string>
     <string name="developer_email_b">yesbijay@gmail.com</string>
     <string name="developer_email_c">readeravskh@gmail.com</string>
+    <string name="silptech_email">silptechnepal@gmail.com</string>
+
+    <string name="aboutRegNo">949/065-066</string>
+    <string name="aboutPanNo">303768821</string>
+    <string name="aboutCOffice">Central Office: Battisputali-9, Kathmandu,Nepal</string>
+    <string name="centralContactOneName">Rishiraj Koirala</string>
+    <string name="centralContactOneNumber">9851051669</string>
+    <string name="centralContactTwoName">Nawaraj Koirala</string>
+    <string name="centralContactTwoNumber">9841286783</string>
+    <string name="centralContactTwoEmail">nawarajkoirala50@gmail.com</string>
+    <string name="centralContactThreeName">Khemraj Koirala</string>
+    <string name="centralContactThreeNumber">9851052742</string>
+    <string name="aboutRCOffice">Tanki-Sinwari-1, Morang, Nepal</string>
+    <string name="regionalContactOneName">Ishwor Koirala</string>
+    <string name="regionalContactOneNumber">9852030766</string>
+    <string name="regionalContactTwoName">Dibyaraj Koirala</string>
+    <string name="regionalContactTwoNumber">9842022264</string>
+    <string name="regionalContactThreeName">Nabin Koirala</string>
+    <string name="regionalContactThreeNumber">9852030671</string>
+
+    <!-- Text for displaying toast to user on crash -->
+    <string name="crash_toast_text">Ooooops ! I crashed, but a report can be sent to my developer
+        to help fix the issue !</string>
 
 </resources>

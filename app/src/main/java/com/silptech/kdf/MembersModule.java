@@ -6,7 +6,7 @@ package com.silptech.kdf;
 public class MembersModule {
     public int id;
     public String name;
-    public int phone;
+    public String phone;
     public String address;
     public int amount;
 
@@ -34,11 +34,11 @@ public class MembersModule {
         this.address = address;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

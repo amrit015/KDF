@@ -22,23 +22,23 @@ import java.util.ArrayList;
 /**
  * Created by Amrit on 2/4/2016.
  */
-public class ContactFragment extends android.support.v4.app.Fragment {
+public class MembersFragment extends android.support.v4.app.Fragment {
     /*
              Stores the scroll position of the ListView
     */
     private static Parcelable mListViewScrollPos = null;
 
     private final static String TAG = "MainActivity";
-    DatabaseHelper dbHelper = null;
+    DatabaseHelperMembers dbHelper = null;
     Context context;
     ListView listView;
     ArrayList<MembersModule> memberList = new ArrayList<MembersModule>();
-    CustomAdapter adapter;
+    MembersAdapter adapter;
     File folder;
     InputStream assets_path;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.contacts_listview, container, false);
+        View view = inflater.inflate(R.layout.fragment_members, container, false);
         listView = (ListView) view.findViewById(R.id.listview);
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Database");
         folder.mkdirs();
@@ -46,7 +46,7 @@ public class ContactFragment extends android.support.v4.app.Fragment {
         //creating database object and defining its path
         try {
             assets_path = getActivity().getAssets().open("database.db");
-            dbHelper = new DatabaseHelper(context, folder.toString(), assets_path);
+            dbHelper = new DatabaseHelperMembers(context, folder.toString(), assets_path);
             Log.i(TAG, " from contacts :" + folder.toString());
             dbHelper.prepareDatabase();
         } catch (IOException e) {
@@ -85,7 +85,7 @@ public class ContactFragment extends android.support.v4.app.Fragment {
             int id = list.get(i).getId();
             String name = list.get(i).getName();
             String address = list.get(i).getAddress();
-            int phone = list.get(i).getPhone();
+            String phone = list.get(i).getPhone();
             int amount = list.get(i).getAmount();
 
             MembersModule membersModule = new MembersModule();
@@ -96,7 +96,7 @@ public class ContactFragment extends android.support.v4.app.Fragment {
             membersModule.setAmount(amount);
             memberList.add(membersModule);
         }
-        adapter = new CustomAdapter(getActivity(), memberList);
+        adapter = new MembersAdapter(getActivity(), memberList);
         listView.setAdapter(adapter);
     }
 

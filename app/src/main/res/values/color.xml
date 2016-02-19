@@ -18,5 +18,5 @@
     <item name="main_red" type="color">#ffa60000</item>
     <item name="logo_colour" type="color">#27cae3</item>
     <item name="logo_colour_dark" type="color">#1f6891</item>
-
+    <item name="main_red_light" type="color">#bebc0101</item>
 </resources>

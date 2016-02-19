@@ -65,6 +65,7 @@
                 android:layout_below="@+id/nav_image"
                 android:choiceMode="singleChoice"
                 android:divider="@color/white"
+                android:listSelector="@color/light"
                 android:dividerHeight="1dp" />
         </RelativeLayout>
 

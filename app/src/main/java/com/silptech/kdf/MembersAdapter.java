@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.silptech.kdf.Utils.CallDial;
@@ -23,14 +24,14 @@ import java.util.ArrayList;
  * Created by Amrit on 3/30/2015.
  * This class implements BaseAdapter and returns text to the listView.
  */
-public class CustomAdapter extends BaseAdapter {
+public class MembersAdapter extends BaseAdapter {
 
-    private static final String TAG = "CustomAdapter";
+    private static final String TAG = "MembersAdapter";
     ArrayList<MembersModule> newList;
     Activity context;
 //    Typeface customFont;
 
-    public CustomAdapter(Activity activity, ArrayList<MembersModule> list) {
+    public MembersAdapter(Activity activity, ArrayList<MembersModule> list) {
         newList = list;
         context = activity;
 //        this.customFont = customFont;
@@ -59,13 +60,14 @@ public class CustomAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.contacts_fragments, parent, false);
+            convertView = inflater.inflate(R.layout.adapter_members, parent, false);
             holder.ID = (TextView) convertView.findViewById(R.id.member_id);
             holder.NAME = (TextView) convertView.findViewById(R.id.member_name);
             holder.ADDRESS = (TextView) convertView.findViewById(R.id.member_address);
             holder.PHONE = (TextView) convertView.findViewById(R.id.member_phone);
             holder.AMOUNT = (TextView) convertView.findViewById(R.id.member_amount);
             holder.CALL = (ImageView) convertView.findViewById(R.id.member_call);
+            holder.phoneLayout = (LinearLayout) convertView.findViewById(R.id.layout_phone);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -75,7 +77,7 @@ public class CustomAdapter extends BaseAdapter {
         holder.ADDRESS.setText(Html.fromHtml(newList.get(position).getAddress()).toString());
         holder.PHONE.setText(Html.fromHtml(String.valueOf(newList.get(position).getPhone())).toString());
         holder.AMOUNT.setText(Html.fromHtml("Rs. " + String.valueOf(newList.get(position).getAmount())).toString());
-        holder.CALL.setOnClickListener(new View.OnClickListener() {
+        holder.phoneLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String phoneCall = String.valueOf((newList.get(position).getPhone()));
@@ -92,5 +94,6 @@ public class CustomAdapter extends BaseAdapter {
         TextView PHONE;
         TextView AMOUNT;
         ImageView CALL;
+        LinearLayout phoneLayout;
     }
 }

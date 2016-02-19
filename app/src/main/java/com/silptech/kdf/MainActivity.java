@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout relativeLayout;
     private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
-    TitleAdapter adapter;
+    DrawerTitleAdapter adapter;
 
     // title drawer
     String[] drawerItemsArray;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         drawerIconsArray = getResources().obtainTypedArray(R.array.NavIcons);
 
         //set Adapter to the left drawer and passing layout for text
-        adapter = new TitleAdapter(this, R.layout.adapter_title_drawer, drawerItemsArray, drawerIconsArray);
+        adapter = new DrawerTitleAdapter(this, R.layout.adapter_title_drawer, drawerItemsArray, drawerIconsArray);
         drawerList.setAdapter(adapter);
 
         //set up click listener for the drawer items
@@ -119,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            view.setBackgroundColor(getResources().getColor(R.color.material_palette));
+//            view.setSelected(true);
             selectItem(position);
         }
     }
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 fm = new NoticesFragment();
                 break;
             case 2:
-                fm = new ContactFragment();
+                fm = new MembersFragment();
                 break;
             case 3:
                 fm = new NotesFragment();
@@ -216,5 +218,4 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.i(TAG, "Package Name : " + getApplicationContext().getPackageName());
     }
-
 }

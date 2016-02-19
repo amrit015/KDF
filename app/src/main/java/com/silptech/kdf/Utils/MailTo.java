@@ -10,7 +10,7 @@ import android.widget.Toast;
 /**
  * Created by Amrit on 2/15/2016.
  */
-public class EmailDevelopers {
+public class MailTo {
 
     static Context myContext;
 

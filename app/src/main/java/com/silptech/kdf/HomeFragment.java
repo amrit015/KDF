@@ -60,7 +60,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // initialization
-        View view = inflater.inflate(R.layout.content_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         kdfNepali = (TextView) view.findViewById(R.id.kdf_nepali);
         kdfEnglish = (TextView) view.findViewById(R.id.kdf_english);
         intro = (TextView) view.findViewById(R.id.kdf_intro);

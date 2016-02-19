@@ -14,8 +14,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    private final static String TAG = "DatabaseHelper";
+public class DatabaseHelperMembers extends SQLiteOpenHelper {
+    private final static String TAG = "DatabaseHelperMembers";
     private final Context myContext;
     private static final String DATABASE_NAME = "database.db";
     //defining sqlite database file on assets folder named as database.db
@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String pathToSaveDBFile;
     InputStream database_assets;
 
-    public DatabaseHelper(Context context, String filePath, InputStream assets_path) {
+    public DatabaseHelperMembers(Context context, String filePath, InputStream assets_path) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.myContext = context;
         pathToSaveDBFile = new StringBuffer(filePath).append("/").append(DATABASE_NAME).toString();
@@ -114,7 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             member.setId(cursor.getInt(0));
             member.setName(cursor.getString(1));
             member.setAddress(cursor.getString(2));
-            member.setPhone(cursor.getInt(3));
+            member.setPhone(cursor.getString(3));
             member.setAmount(cursor.getInt(4));
             list.add(member);
         }

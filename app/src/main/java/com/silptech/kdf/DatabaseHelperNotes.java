@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by Amrit on 2/17/2016.
  */
-public class DatabaseNotes extends SQLiteOpenHelper {
+public class DatabaseHelperNotes extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     SQLiteDatabase db;
     public static String DATABASE_NAME = "notesDatabase", NOTES_TABLE = "notesTable",
@@ -23,7 +23,7 @@ public class DatabaseNotes extends SQLiteOpenHelper {
     private ArrayList<CacheModule> listNotes = new ArrayList<CacheModule>();
 
 
-    public DatabaseNotes(File filename, Context context) {
+    public DatabaseHelperNotes(File filename, Context context) {
         super(context, filename + ("/") + DATABASE_NAME, null, DATABASE_VERSION);
         c = context;
     }
@@ -49,12 +49,8 @@ public class DatabaseNotes extends SQLiteOpenHelper {
         // TODO Auto-generated method stub
         db = this.getReadableDatabase();
         ContentValues contentvalues = new ContentValues();
-//        contentvalues.put("nId", db.insert(NOTES_TABLE, null, contentvalues));
         contentvalues.put("title", nm.title);
         contentvalues.put("notes", nm.notes);
-        //getting default id of each row
-//        long id = db.insert(NOTES_TABLE,null,contentvalues);
-//        Log.i("Database", "id :" + db.insert(NOTES_TABLE, null, contentvalues));
         db.insert(NOTES_TABLE, null, contentvalues);
         db.close();
     }
@@ -68,9 +64,6 @@ public class DatabaseNotes extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     CacheModule item = new CacheModule();
-//                    item.id = cursor.getLong(cursor
-//                            .getColumnIndex("nId"));
-//                    Log.i("Database", "id item :" + item.id);
                     item.title = cursor.getString(cursor
                             .getColumnIndex("title"));
                     item.notes = cursor.getString(cursor

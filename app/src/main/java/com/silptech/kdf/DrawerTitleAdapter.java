@@ -12,13 +12,13 @@ import android.widget.TextView;
 /**
  * Created by Amrit on 2/4/2016.
  */
-public class TitleAdapter extends BaseAdapter {
+public class DrawerTitleAdapter extends BaseAdapter {
     private final String[] drawerItemsArray;
     private final TypedArray drawerIconsArray;
     Context c;
     private int id; //textView layout id
 
-    public TitleAdapter(Context context, int adapter_title, String[] drawerItemsArray, TypedArray drawerIconsArray) {
+    public DrawerTitleAdapter(Context context, int adapter_title, String[] drawerItemsArray, TypedArray drawerIconsArray) {
         this.drawerItemsArray = drawerItemsArray;
         this.drawerIconsArray = drawerIconsArray;
         c = context;

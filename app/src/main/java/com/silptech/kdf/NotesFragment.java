@@ -20,8 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +36,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
     Context context;
     private ArrayList<CacheModule> memoArray = new ArrayList<>();
     File folder;
-    DatabaseNotes db;
+    DatabaseHelperNotes db;
     CacheModule cacheModule;
     EditText dialogNotesTitle;
     EditText dialogNotesContent;
@@ -123,7 +121,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
 
     private void editItem(String title, String notes) {
         dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.layout_add_notes);
+        dialog.setContentView(R.layout.activity_add_notes);
         dialog.show();
         dialogNotesTitle = (EditText) dialog.findViewById(R.id.memo_add_title);
         dialogNotesContent = (EditText) dialog.findViewById(R.id.memo_add_contents);
@@ -188,7 +186,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
 
     public ArrayList getDataSet() throws IOException {
         memoArray.clear();
-        db = new DatabaseNotes(folder, getActivity());
+        db = new DatabaseHelperNotes(folder, getActivity());
         ArrayList<CacheModule> list = db.getNotes();
         for (int i = list.size() - 1; i >= 0; i--) {
             String nTitle = list.get(i).getTitle();
@@ -216,6 +214,4 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
             }
         }
     }
-
-
 }

@@ -29,9 +29,9 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
 
     private static final String TAG = "SearchQueryActivity";
     ListView listView;
-    DatabaseHelper dbHelper = null;
+    DatabaseHelperMembers dbHelper = null;
     ArrayList<MembersModule> memberList = new ArrayList<MembersModule>();
-    CustomAdapter adapter;
+    MembersAdapter adapter;
     InputStream assets_path;
     File folder;
     LinearLayout resultsLayout;
@@ -40,7 +40,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contacts_listview);
+        setContentView(R.layout.fragment_members);
         listView = (ListView) findViewById(R.id.listview);
         resultsLayout = (LinearLayout) findViewById(R.id.results_layout);
         resultsText = (TextView) findViewById(R.id.results_search);
@@ -50,7 +50,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
         folder.mkdirs();
         try {
             assets_path = this.getAssets().open("database.db");
-            dbHelper = new DatabaseHelper(getApplicationContext(), folder.toString(), assets_path);
+            dbHelper = new DatabaseHelperMembers(getApplicationContext(), folder.toString(), assets_path);
             dbHelper.prepareDatabase();
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
@@ -105,7 +105,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
             int id = list.get(i).getId();
             String name = list.get(i).getName();
             String address = list.get(i).getAddress();
-            int phone = list.get(i).getPhone();
+            String phone = list.get(i).getPhone();
             int amount = list.get(i).getAmount();
             String toSearch = name.replace(" ", "").toLowerCase();
 
@@ -121,7 +121,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
             }
         }
         if (memberList.size() > 0) {
-            adapter = new CustomAdapter(this, memberList);
+            adapter = new MembersAdapter(this, memberList);
             listView.setAdapter(adapter);
         } else {
             Toast.makeText(getApplicationContext(), "No results found", Toast.LENGTH_SHORT).show();

@@ -19,17 +19,77 @@
                 android:id="@+id/memo_add_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:hint="Title"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
+
+            <EditText
+                android:id="@+id/memo_add_contents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Notes"
+                android:padding="5dp"
                 android:textSize="15dp" />
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/memo_add_contents"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Notes"
-            android:textSize="15dp" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lighter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/update_layout"
+        android:visibility="gone"
+        android:gravity="center"
+        android:weightSum="5"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/logo_colour_dark"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:id="@+id/update_save"
+            android:padding="15dp"
+            android:text="Save"
+            android:textColor="@color/white" />
+
+        <Space
+            android:layout_width="25dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/light"
+            android:id="@+id/update_cancel"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Cancel"
+            android:textColor="@color/material_palette_light" />
     </LinearLayout>
 
 </LinearLayout>

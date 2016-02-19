@@ -1,31 +1,31 @@
 package com.silptech.kdf;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.silptech.kdf.Utils.CacheNotification;
 
 import java.io.File;
 
 /**
  * Created by Amrit on 2/13/2016.
  */
-public class NotesClickedActivity extends AppCompatActivity {
+public class NotesAddActivity extends AppCompatActivity {
 
-    private static final String TAG = "NotesClickedActivity";
+    private static final String TAG = "NotesAddActivity";
     EditText notesTitle;
     EditText notesContent;
     String notesTitleText;
     String notesContentText;
     File folder;
-    String xfileName = "cache_note";
-    int i;
+    DatabaseNotes db;
+    CacheModule CacheModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,10 @@ public class NotesClickedActivity extends AppCompatActivity {
         setContentView(R.layout.layout_add_notes);
         notesTitle = (EditText) findViewById(R.id.memo_add_title);
         notesContent = (EditText) findViewById(R.id.memo_add_contents);
-        folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Memo");
+        folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notes");
         folder.mkdirs();
+        ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
+                .showSoftInput(notesTitle, InputMethodManager.SHOW_FORCED);
         Log.i(TAG, "folder : " + folder);
     }
 
@@ -65,36 +67,34 @@ public class NotesClickedActivity extends AppCompatActivity {
             A. if both title and contents aren't empty
             B. if both title and contents are empty
          */
-        if ((!notesTitleText.equals("") && !notesContentText.equals("")) ||
-                (notesTitleText.equals("") && notesContentText.equals(""))) {
+        if ((notesTitleText.length() > 0) && (notesContentText.length() > 0) ||
+                ((notesTitleText.length() == 0) && (notesContentText.length() == 0))) {
             onSavedNote();
-            if (notesTitleText.equals("") && notesContentText.equals("")) {
-                Toast.makeText(getApplicationContext(), "Empty Title and Note. Note cannot be saved", Toast.LENGTH_LONG).show();
+            if ((notesTitleText.length() == 0) && (notesContentText.length() == 0)) {
+                Toast.makeText(getApplicationContext(), "Empty Title and Note. Note cannot be saved", Toast.LENGTH_SHORT).show();
             }
         }
 
-        if (!notesTitleText.equals("") || !notesContentText.equals("")) {
-            if (notesTitleText.equals("")) {
-                Toast.makeText(getApplicationContext(), "Please input Title", Toast.LENGTH_LONG).show();
+        if ((notesTitleText.length() == 0) || (notesContentText.length() == 0)) {
+            if (notesTitleText.length() == 0) {
+                Toast.makeText(getApplicationContext(), "Please input Title", Toast.LENGTH_SHORT).show();
             }
-            if (notesContentText.equals("")) {
-                Toast.makeText(getApplicationContext(), "Please input Note", Toast.LENGTH_LONG).show();
+            if (notesContentText.length() == 0) {
+                Toast.makeText(getApplicationContext(), "Please input Note", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void onSavedNote() {
-        if (!notesTitleText.equals("") && !notesContentText.equals("")) {
-            if (folder.exists()) {
-                i = folder.list().length;
-            } else {
-                i = 0;
-            }
-            String filename = xfileName + i;
-            CacheNotification.writeFile(filename, ("##" + notesTitleText + "###" + notesContentText + "####"), folder);
-            Toast.makeText(getApplicationContext(), "Notes successfully saved", Toast.LENGTH_LONG).show();
-            this.finish();
+        if ((notesTitleText.length() > 0) && (notesContentText.length() > 0)) {
+            db = new DatabaseNotes(folder, getApplicationContext());
+            CacheModule = new CacheModule();
+            CacheModule.title = notesTitleText;
+            CacheModule.notes = notesContentText;
+            db.addNotes(CacheModule);
+            Toast.makeText(getApplicationContext(), "Notes successfully saved", Toast.LENGTH_SHORT).show();
         }
+        this.finish();
     }
 
     private void onGetText() {

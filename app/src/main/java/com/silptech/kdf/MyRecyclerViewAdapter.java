@@ -1,9 +1,13 @@
 package com.silptech.kdf;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -16,9 +20,13 @@ import java.util.ArrayList;
  * which extends RecyclerView.ViewHolder
  */
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.NoticesHolder> {
-    private ArrayList<NoticesModule> mDataset;
+    private ArrayList<CacheModule> mDataset;
     private static String LOG_TAG = "MyRecyclerViewAdapter";
     CardView cardView;
+    Context context;
+    private String title;
+    private String notes;
+    private int position;
 
     public class NoticesHolder extends RecyclerView.ViewHolder {
 
@@ -37,14 +45,31 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             noteTitle = (TextView) itemView.findViewById(R.id.note_title);
             noteContents = (TextView) itemView.findViewById(R.id.note_contents);
             Log.i(LOG_TAG, "Adding Listener");
-//            itemView.setOnClickListener(this);
         }
+    }
 
-//        @Override
-//        public void onClick(View v) {
-//            Toast.makeText(itemView.getContext(), "Item clicked. "+uniName.getText(), Toast.LENGTH_SHORT).show();
-//
-//        }
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public MyRecyclerViewAdapter(ArrayList mDataset) {
@@ -54,38 +79,38 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public NoticesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_notices_adapter, parent, false);
+                .inflate(R.layout.fragment_cardview_adapter, parent, false);
+        context = parent.getContext();
         NoticesHolder noticesHolder = new NoticesHolder(view);
         return noticesHolder;
     }
 
     @Override
-    public void onBindViewHolder(NoticesHolder holder, int position) {
-        NoticesModule noticesModule = mDataset.get(position);
-        if (noticesModule.getMessage() != "") {
-
-            holder.noticeMessage.setText(noticesModule.getMessage());
-            holder.noticeAuthor.setText(noticesModule.getAuthor());
-            holder.noticeDate.setText(noticesModule.getDate());
-        } else if (noticesModule.getNotesTitle() != "" && noticesModule.getNotesContents() != "") {
-            holder.noteTitle.setText(noticesModule.getNotesTitle());
-            holder.noteContents.setText(noticesModule.getNotesContents());
+    public void onBindViewHolder(final NoticesHolder holder, final int position) {
+        CacheModule cacheModule = mDataset.get(position);
+        if (cacheModule.getMessage() != "") {
+            holder.noticeMessage.setText(cacheModule.getMessage());
+            holder.noticeAuthor.setText(cacheModule.getAuthor());
+            holder.noticeDate.setText(cacheModule.getDate());
+        } else if (cacheModule.getTitle() != "" && cacheModule.getNotes() != "") {
+            holder.noteTitle.setText(cacheModule.getTitle());
+            holder.noteContents.setText(cacheModule.getNotes());
             holder.noteTitle.setVisibility(View.VISIBLE);
             holder.noteContents.setVisibility(View.VISIBLE);
         } else {
             cardView.setVisibility(View.GONE);
         }
+        //saving title,notes and position of each cards for contextmenu
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setTitle(holder.noteTitle.getText().toString());
+                setNotes(holder.noteContents.getText().toString());
+                setPosition(position);
+                return false;
+            }
+        });
     }
-
-//    public void addItem(NoticesModule dataObj, int index) {
-//        mDataset.add(index, dataObj);
-//        notifyItemInserted(index);
-//    }
-//
-//    public void deleteItem(int index) {
-//        mDataset.remove(index);
-//        notifyItemRemoved(index);
-//    }
 
     @Override
     public int getItemCount() {

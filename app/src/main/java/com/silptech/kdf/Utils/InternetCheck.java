@@ -4,7 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 
 /**
- * Created by Amrit on 2/16/2016.
+ * This class checks if the internet connection is available.
+ * If internet is available, this class returns TRUE
  */
 public class InternetCheck {
 

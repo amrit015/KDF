@@ -24,6 +24,11 @@ import android.widget.RelativeLayout;
 import com.pushbots.push.Pushbots;
 import com.silptech.kdf.Utils.StatusBarColor;
 
+/*
+    THis is the main activity which opens after SPlash Screen. Here the navigation drawer is defined and populated
+    and each corresponding drawer item click activity is defined and inflated on the fragment of this Activity.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     // defining variables for navigation drawer
@@ -32,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView drawerList;
     private ActionBarDrawerToggle drawerToggle;
     TitleAdapter adapter;
+
+    // title drawer
     String[] drawerItemsArray;
 
     // TypedArray for displaying icons let to navigation drawer titles
@@ -79,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar App icon to behave as action to toggle navigation drawer
-        // showing the navigation drawer kdfNepali button just like menu to open/close the drawer
+        // showing the navigation drawer button just like menu to open/close the drawer
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -101,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 supportInvalidateOptionsMenu();
             }
         };
+
         //selecting default navigation drawer on startup
         if (savedInstanceState == null) {
             selectItem(0);
@@ -129,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 fm = new ContactFragment();
                 break;
             case 3:
-                fm = new MemoFragment();
+                fm = new NotesFragment();
                 break;
             case 4:
                 fm = new AboutUsFragment();
@@ -174,11 +182,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
          /*
-         * The action bar kdf/up action should open or close the drawer.
+         * The action bar - up action should open or close the drawer.
 		 * drawerToggle will take care of this.
 		 */
         if (drawerToggle.onOptionsItemSelected(item)) {
-            // handles kdfNepali button click
+            // handles navigation button click
             return true;
         }
 
@@ -207,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
                     + getApplicationContext().getPackageName())));
         }
         Log.i(TAG, "Package Name : " + getApplicationContext().getPackageName());
-
     }
 
 }

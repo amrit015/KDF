@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="New Notice"
-            android:textColor="@color/main_red"
+            android:textColor="@color/black"
             android:textSize="18dp" />
 
     </LinearLayout>

@@ -3,28 +3,29 @@ package com.silptech.kdf;
 /**
  * Created by Amrit on 2/9/2016.
  */
-public class NoticesModule {
+public class CacheModule {
 
     private String message = "";
     private String author = "";
     private String date = "";
-    private String notesTitle = "";
-    private String notesContents = "";
+    public String title = "";
+    public String notes = "";
+    public long id;
 
-    public String getNotesTitle() {
-        return notesTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNotesTitle(String notesTitle) {
-        this.notesTitle = notesTitle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getNotesContents() {
-        return notesContents;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setNotesContents(String notesContents) {
-        this.notesContents = notesContents;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getMessage() {
@@ -49,5 +50,13 @@ public class NoticesModule {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

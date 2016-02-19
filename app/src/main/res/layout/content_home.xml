@@ -29,7 +29,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:textColor="@color/material_palette"
-                android:textSize="21dp" />
+                android:textSize="22dp" />
 
             <TextView
                 android:id="@+id/kdf_intro"
@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@color/black_light"
                 android:textSize="17dp" />
 
             <TextView
@@ -63,15 +64,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@color/black_light"
                 android:textSize="17dp" />
 
             <TextView
-                android:textColor="@color/material_palette"
                 android:id="@+id/kdf_objectives"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
+                android:textColor="@color/material_palette"
                 android:textSize="22dp"
 
                 />
@@ -81,17 +83,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@color/black_light"
                 android:textSize="17dp"
 
                 />
 
             <TextView
-                android:textColor="@color/material_palette"
                 android:id="@+id/kdf_membership_requirement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
+                android:textColor="@color/material_palette"
                 android:textSize="22dp"
 
                 />
@@ -101,15 +104,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@color/black_light"
                 android:textSize="17dp" />
 
             <TextView
-                android:textColor="@color/material_palette"
                 android:id="@+id/kdf_general"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
+                android:textColor="@color/material_palette"
                 android:textSize="22dp"
 
                 />
@@ -119,17 +123,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@color/black_light"
                 android:textSize="17dp"
 
                 />
 
             <TextView
-                android:textColor="@color/material_palette"
                 android:id="@+id/kdf_central_board"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="10dp"
+                android:textColor="@color/material_palette"
                 android:textSize="22dp"
 
                 />
@@ -139,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
+                android:textColor="@color/black_light"
                 android:textSize="17dp" />
         </LinearLayout>
     </ScrollView>

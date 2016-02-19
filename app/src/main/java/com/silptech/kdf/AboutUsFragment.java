@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Amrit on 2/4/2016.
+ * This fragment displays the corresponding layout.
+ * The organisation info are displayed here.
  */
 public class AboutUsFragment extends android.support.v4.app.Fragment {
 

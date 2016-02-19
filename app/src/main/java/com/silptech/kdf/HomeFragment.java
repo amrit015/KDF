@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Created by Amrit on 2/4/2016.
+ * This is the fragment which is also the startup fragment that displays on opening the app.
+ * The text(Nepali) is Typedfaced and custom font is used to display the nepali fonts.
+ * The nepali unicode is also used and taken from file.
  */
 public class HomeFragment extends android.support.v4.app.Fragment {
 
@@ -57,6 +59,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // initialization
         View view = inflater.inflate(R.layout.content_home, container, false);
         kdfNepali = (TextView) view.findViewById(R.id.kdf_nepali);
         kdfEnglish = (TextView) view.findViewById(R.id.kdf_english);
@@ -73,7 +76,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         centralBoard = (TextView) view.findViewById(R.id.kdf_central_board);
         centralBoardDescription = (TextView) view.findViewById(R.id.kdf_central_board_description);
 
-
+        // using customfont and setting the fonts to respective textviews
         customFont = Typeface.createFromAsset(getActivity().getAssets(),
                 "fonts/sagarmatha.TTF");
         kdfNepali.setTypeface(customFont);
@@ -90,21 +93,24 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         centralBoard.setTypeface(customFont);
         centralBoardDescription.setTypeface(customFont);
 
+        // getting strings from R.string
         kdfNepaliText = getActivity().getResources().getString(R.string.kdf_text_nepali);
         kdfEnglishText = getActivity().getResources().getString(R.string.kdf_text_english);
         introText = getActivity().getResources().getString(R.string.kdf_intro);
-//        introDescriptionText = getActivity().getResources().getString(R.string.kdf_intro_description);
         organisationText = getActivity().getResources().getString(R.string.kdf_organisation);
-//        organisationDescriptionText = getActivity().getResources().getString(R.string.kdf_organisation_description);
         objectiveText = getActivity().getResources().getString(R.string.kdf_objective);
-//        objectiveDescriptionText = getActivity().getResources().getString(R.string.kdf_objective_description);
         membershipRequirementText = getActivity().getResources().getString(R.string.kdf_membership);
-//        membershipRequirementDescriptionText = getActivity().getResources().getString(R.string.kdf_membership_description);
         generalText = getActivity().getResources().getString(R.string.kdf_general);
-//        generalDescriptionText = getActivity().getResources().getString(R.string.kdf_general_description);
         centralBoardText = getActivity().getResources().getString(R.string.kdf_central_board);
+
+//        introDescriptionText = getActivity().getResources().getString(R.string.kdf_intro_description);
+//        organisationDescriptionText = getActivity().getResources().getString(R.string.kdf_organisation_description);
+//        objectiveDescriptionText = getActivity().getResources().getString(R.string.kdf_objective_description);
+//        membershipRequirementDescriptionText = getActivity().getResources().getString(R.string.kdf_membership_description);
+//        generalDescriptionText = getActivity().getResources().getString(R.string.kdf_general_description);
 //        centralBoardDescriptionText = getActivity().getResources().getString(R.string.kdf_central_board_description);
 
+        //getting nepali unicode from files inside assets folder
         try {
             intro_desc = getActivity().getAssets().open("kdf_intro_description.txt");
             int size1 = intro_desc.available();
@@ -154,11 +160,11 @@ public class HomeFragment extends android.support.v4.app.Fragment {
             // Convert the buffer into a string.
             centralBoardDescriptionText = new String(buffer6);
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // setting string to the textview
         kdfNepali.setText(kdfNepaliText);
         kdfEnglish.setText(kdfEnglishText);
         intro.setText(introText);
@@ -173,7 +179,6 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         generalDescription.setText(generalDescriptionText);
         centralBoard.setText(centralBoardText);
         centralBoardDescription.setText(centralBoardDescriptionText);
-
         return view;
     }
 }

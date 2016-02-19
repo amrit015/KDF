@@ -39,7 +39,7 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
     LinearLayout progressBar;
     public final static String TAG = "NoticesFragment";
     Context context;
-    private ArrayList<NoticesModule> noticesArray;
+    private ArrayList<CacheModule> noticesArray;
     String filename, message_string, author_string, date_string;
     String xfileName = "cache_file";
     String notification_cache;
@@ -150,7 +150,7 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
         }
     }
 
-    public ArrayList<NoticesModule> getDataSet() throws IOException {
+    public ArrayList<CacheModule> getDataSet() throws IOException {
         noticesArray = new ArrayList();
 
         for (int i = 0; i < folder.list().length; i++) {
@@ -164,11 +164,11 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                 message_string = notification_cache.substring(a + 1, b);
                 author_string = notification_cache.substring(b + 2, c);
                 date_string = notification_cache.substring(c + 3, d);
-                NoticesModule noticesModule = new NoticesModule();
-                noticesModule.setMessage(message_string);
-                noticesModule.setAuthor(author_string);
-                noticesModule.setDate(date_string);
-                noticesArray.add(noticesModule);
+                CacheModule cacheModule = new CacheModule();
+                cacheModule.setMessage(message_string);
+                cacheModule.setAuthor(author_string);
+                cacheModule.setDate(date_string);
+                noticesArray.add(cacheModule);
             }
         }
         Log.i(TAG, "folder length :" + folder.list().length);

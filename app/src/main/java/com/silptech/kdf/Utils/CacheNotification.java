@@ -10,23 +10,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Created by Amrit on 2/7/2016.
+ * This class is used to save String to a file in the storage.
+ * Both storage location and filename along with String (to save to file) are sent to the writeFile function.
+ * Only filename and file location are provided to the readFile function and string is returned.
  */
 public class CacheNotification {
 
     private static final String TAG = "CacheNotification";
-
     public CacheNotification() {
         //constructor
     }
 
     //writing notification string to a file
     public static File writeFile(String fileName, String notification, File folder) {
-        //Creating folder to save files
-//        File folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notices");
         Log.i(TAG, "folder path : " + folder);
-        // checking to see if folder exists
-        folder.mkdirs();
         //saving the path to the folder as string
         String extStorageDirectory = folder.toString();
 
@@ -48,10 +45,9 @@ public class CacheNotification {
 
     //reading notification string from a file
     public static String readFile(String fileName, File folder) throws IOException {
-        // Defining folder where files are saved
-//        File folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notices");
         //saving the path to the folder as string
         String extStorageDirectory = folder.toString();
+
         File cacheFile = new File(extStorageDirectory, fileName);
         StringBuilder builder = new StringBuilder();
         try {
@@ -59,6 +55,7 @@ public class CacheNotification {
             BufferedReader br = new BufferedReader(new FileReader(cacheFile));
             while ((currentLine = br.readLine()) != null) {
                 builder.append(currentLine);
+                builder.append("\n");
             }
             br.close();
         } catch (IOException e) {

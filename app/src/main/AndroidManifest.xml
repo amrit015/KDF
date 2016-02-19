@@ -77,8 +77,9 @@
         </activity>
 
         <activity
-            android:name=".NotesClickedActivity"
+            android:name=".NotesAddActivity"
             android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="stateAlwaysVisible"
             android:parentActivityName="com.silptech.kdf.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

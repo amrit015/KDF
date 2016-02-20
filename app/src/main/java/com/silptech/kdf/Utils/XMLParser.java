@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ConnectTimeoutException;
@@ -29,6 +30,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class XMLParser {
+    public static int statusCode;
 
     // constructor
     public XMLParser() {
@@ -40,7 +42,7 @@ public class XMLParser {
      *
      * @param url string
      */
-    public String getXmlFromUrl(String url) {
+    public static String getXmlFromUrl(String url) {
         String xml = null;
         HttpParams httpParams = new BasicHttpParams();
         //setting timeout in milliseconds until connection is established
@@ -49,6 +51,8 @@ public class XMLParser {
         //setting the default socket timeout
         int timeoutSocket = 10000;
         DefaultHttpClient httpClient;
+        StatusLine statusLine;
+
 
         try {
             HttpGet httpGet = new HttpGet(url);
@@ -60,7 +64,12 @@ public class XMLParser {
             httpGet.setParams(httpParams);
 //            HttpPost httpPost = new HttpPost(url);
             HttpResponse httpResponse = httpClient.execute(httpGet);
+
+            statusLine = httpResponse.getStatusLine();
+            statusCode = statusLine.getStatusCode();
+            Log.i("XML PARSER", " status code : " + statusCode);
             HttpEntity httpEntity = httpResponse.getEntity();
+
             xml = EntityUtils.toString(httpEntity);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

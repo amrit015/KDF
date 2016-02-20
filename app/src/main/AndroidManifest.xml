@@ -26,13 +26,17 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
+        android:name="com.silptech.kdf.Utils.AcraErrorReport"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SplashScreenActivity">
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -82,8 +86,8 @@
         <activity
             android:name=".NotesAddActivity"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateAlwaysVisible"
-            android:parentActivityName="com.silptech.kdf.MainActivity">
+            android:parentActivityName="com.silptech.kdf.MainActivity"
+            android:windowSoftInputMode="stateAlwaysVisible">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.silptech.kdf.MainActivity" />
@@ -92,8 +96,8 @@
         <activity
             android:name=".DevelopersActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.silptech.kdf.MainActivity">
+            android:parentActivityName="com.silptech.kdf.MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.silptech.kdf.MainActivity" />

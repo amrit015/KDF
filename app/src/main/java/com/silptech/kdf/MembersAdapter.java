@@ -1,13 +1,9 @@
 package com.silptech.kdf;
 
-/**
- * Created by Amrit on 2/8/2016.
- */
-
 import android.app.Activity;
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
+import com.silptech.kdf.Utils.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

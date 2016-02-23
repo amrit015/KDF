@@ -3,6 +3,7 @@ package com.silptech.kdf;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -45,6 +46,11 @@ public class Notification extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(Notification.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        return super.onKeyUp(keyCode, event);
     }
 }
 

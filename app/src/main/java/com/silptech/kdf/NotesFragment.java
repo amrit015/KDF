@@ -9,7 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import com.silptech.kdf.Utils.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -106,7 +106,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
             Log.i(TAG, "note: " + notes);
             Log.i(TAG, "position: " + position);
         } catch (Exception e) {
-            Log.d(TAG, e.getLocalizedMessage(), e);
+            Log.d(TAG, e.getLocalizedMessage());
             return super.onContextItemSelected(item);
         }
         if (item.getTitle() == "Edit") {

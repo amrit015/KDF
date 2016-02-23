@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
+import com.silptech.kdf.Utils.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;

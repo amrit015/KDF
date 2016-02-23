@@ -2,6 +2,7 @@ package com.silptech.kdf;
 
 /**
  * Created by Amrit on 2/9/2016.
+ * This class serves as an object for NoticesFragment and NotesFragment.
  */
 public class CacheModule {
 

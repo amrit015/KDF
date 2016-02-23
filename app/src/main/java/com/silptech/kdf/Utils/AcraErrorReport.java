@@ -22,5 +22,6 @@ public class AcraErrorReport extends Application {
     public void onCreate() {
         super.onCreate();
         ACRA.init(this); //comment this line to disable
+        //disable it before inserting into playstore
     }
 }

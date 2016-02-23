@@ -13,6 +13,8 @@ import com.silptech.kdf.Utils.MailTo;
 
 /**
  * Created by Amrit on 2/14/2016.
+ * This class displays the developers name and info.
+ * The phone dialing and emailing are also provided.
  */
 public class DevelopersActivity extends AppCompatActivity implements View.OnClickListener {
 

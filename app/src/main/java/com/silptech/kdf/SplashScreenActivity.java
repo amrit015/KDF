@@ -7,6 +7,7 @@ import android.os.Handler;
 
 /**
  * Created by Amrit on 2/9/2016.
+ * Splash Screen for displaying when the app is opened
  */
 public class SplashScreenActivity extends Activity {
 

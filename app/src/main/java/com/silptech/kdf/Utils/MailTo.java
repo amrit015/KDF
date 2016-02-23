@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 /**
  * Created by Amrit on 2/15/2016.
+ * Mailing class
  */
 public class MailTo {
 
@@ -42,6 +43,7 @@ public class MailTo {
             }
         };
 
+        //alertdialog to confirm
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Email " + emailId + "?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();

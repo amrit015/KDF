@@ -29,6 +29,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/*
+ This class executes the url through httpGet and returns the contents.
+ DomElement is used to parse the xml feeds.
+ */
 public class XMLParser {
     public static int statusCode;
 
@@ -37,7 +41,7 @@ public class XMLParser {
 
     }
 
-    /**
+    /*
      * Getting XML from URL making HTTP request
      *
      * @param url string

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 /**
  * Created by Amrit on 2/15/2016.
+ * Phone Dialing class
  */
 public class CallDial {
     public static void PhoneDialer(final Context context, String phoneNumber) {
@@ -52,6 +53,7 @@ public class CallDial {
             }
         };
 
+        //alertdialog to confirm
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Call " + phoneCall + "?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();

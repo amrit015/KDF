@@ -39,6 +39,7 @@ public class Notification extends AppCompatActivity {
         }
     }
 
+    //starting the application on backpressed
     @Override
     public void onBackPressed() {
         super.onBackPressed();

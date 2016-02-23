@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Amrit on 2/4/2016.
+ * This fragment displays the saved notes on the database and provides options such as EDIT,DELETE,SHARE through
+ * the use of contextmenu on long click on the card items.
  */
 public class NotesFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
@@ -63,8 +65,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
             }
         });
         mLayoutManager = new LinearLayoutManager(context);
-//        mLayoutManager.setReverseLayout(true);
-//        mLayoutManager.setStackFromEnd(true);
+        //inflating recyclerview
         try {
             mAdapter = new MyRecyclerViewAdapter(getDataSet());
         } catch (IOException e) {
@@ -74,7 +75,16 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
         return view;
     }
 
-    //adding conterxt menu on longclick to each cards
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        registerForContextMenu(mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    //adding context menu on longclick to each cards
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -111,6 +121,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
         return super.onContextItemSelected(item);
     }
 
+    //share functionality
     private void shareItem(String title, String notes) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
@@ -119,6 +130,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
         startActivity(Intent.createChooser(intent, "SHARE NOTES"));
     }
 
+    //editing the database
     private void editItem(String title, String notes) {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.activity_add_notes);
@@ -168,20 +180,12 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
         dialog.dismiss();
     }
 
+    //removing items from the database
     private void removeItem(String title, int position) {
         memoArray.remove(position);
         db.removeNotes(title);
         Log.i(TAG, "getTitle : " + title);
         mAdapter.notifyItemRemoved(position);
-    }
-
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        registerForContextMenu(mRecyclerView);
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     public ArrayList getDataSet() throws IOException {

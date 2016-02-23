@@ -2,6 +2,7 @@ package com.silptech.kdf;
 
 /**
  * Created by Amrit on 2/8/2016.
+ * Object for MembersFragment class.
  */
 public class MembersModule {
     public int id;

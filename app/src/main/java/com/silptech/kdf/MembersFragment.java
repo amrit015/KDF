@@ -21,12 +21,11 @@ import java.util.ArrayList;
 
 /**
  * Created by Amrit on 2/4/2016.
+ * This fragment is used to access the databse and inflate the layout with names,address,phone and so on.
+ * Listview is used
+ * On search, intent is used to go to SearchQueryActivity
  */
 public class MembersFragment extends android.support.v4.app.Fragment {
-    /*
-             Stores the scroll position of the ListView
-    */
-    private static Parcelable mListViewScrollPos = null;
 
     private final static String TAG = "MainActivity";
     DatabaseHelperMembers dbHelper = null;
@@ -59,10 +58,6 @@ public class MembersFragment extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Restore the ListView position
-        if (mListViewScrollPos != null) {
-            listView.onRestoreInstanceState(mListViewScrollPos);
-        }
     }
 
     @Override
@@ -74,7 +69,6 @@ public class MembersFragment extends android.support.v4.app.Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mListViewScrollPos = listView.onSaveInstanceState();
     }
 
     private void getData() {
@@ -100,6 +94,8 @@ public class MembersFragment extends android.support.v4.app.Fragment {
         listView.setAdapter(adapter);
     }
 
+
+    //search functionality(menu/toolbar)
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // TODO Add your menu entries here

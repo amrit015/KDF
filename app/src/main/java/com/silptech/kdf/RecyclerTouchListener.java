@@ -8,6 +8,7 @@ import android.view.View;
 
 /**
  * Created by Amrit on 1/24/2016.
+ * Custom TouchListener for RecyclerView
  */
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
     private GestureDetector gestureDetector;

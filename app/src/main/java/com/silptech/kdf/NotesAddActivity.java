@@ -15,6 +15,7 @@ import java.io.File;
 
 /**
  * Created by Amrit on 2/13/2016.
+ * This activity is used to insert the title and notes on the database.
  */
 public class NotesAddActivity extends AppCompatActivity {
 
@@ -75,6 +76,7 @@ public class NotesAddActivity extends AppCompatActivity {
             }
         }
 
+        //if onyl one of the two fields i.e. title and note is empty
         if ((notesTitleText.length() == 0) || (notesContentText.length() == 0)) {
             if (notesTitleText.length() == 0) {
                 Toast.makeText(getApplicationContext(), "Please input Title", Toast.LENGTH_SHORT).show();
@@ -85,6 +87,7 @@ public class NotesAddActivity extends AppCompatActivity {
         }
     }
 
+    //saving title and notes to the database
     private void onSavedNote() {
         if ((notesTitleText.length() > 0) && (notesContentText.length() > 0)) {
             db = new DatabaseHelperNotes(folder, getApplicationContext());
@@ -97,13 +100,14 @@ public class NotesAddActivity extends AppCompatActivity {
         this.finish();
     }
 
+    //getting text from edittext
     private void onGetText() {
         notesTitleText = notesTitle.getText().toString();
         notesContentText = notesContent.getText().toString();
         Log.i(TAG, "title : " + notesTitleText);
     }
 
-
+    //on pressing back, notes are saved
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -111,6 +115,7 @@ public class NotesAddActivity extends AppCompatActivity {
         onSavedNote();
     }
 
+    //for startActivityforResult (NotesFragment)
     @Override
     protected void onStop() {
         super.onStop();

@@ -22,7 +22,8 @@ import java.util.ArrayList;
 
 /*
  * Created by Amrit on 3/30/2015.
- * This class implements BaseAdapter and returns text to the listView.
+ * This class is a custom adapter which implements BaseAdapter and returns text to the listView.
+ * The call dialing functionality is also set here.
  */
 public class MembersAdapter extends BaseAdapter {
 

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Amrit on 2/15/2016.
+ * Extends SearchView and used to search through names on the database and display respective names with details.
  */
 public class SeachQueryActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -57,6 +58,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
         }
     }
 
+    //inflating searchview on the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
@@ -76,6 +78,7 @@ public class SeachQueryActivity extends AppCompatActivity implements SearchView.
         return super.onOptionsItemSelected(item);
     }
 
+    //after submitting text
     @Override
     public boolean onQueryTextSubmit(String query) {
         String queryObtained = query.toLowerCase().replace(" ","").toString();

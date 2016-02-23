@@ -14,6 +14,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/*
+    This is a database class which is used by the MembersFragment and SearchQueryActivity class to get the data from the saved database.db
+    The filepath(phone storage location) is provided to this class. Database is initialized and accessed.
+ */
+
 public class DatabaseHelperMembers extends SQLiteOpenHelper {
     private final static String TAG = "DatabaseHelperMembers";
     private final Context myContext;
@@ -27,9 +32,9 @@ public class DatabaseHelperMembers extends SQLiteOpenHelper {
     public DatabaseHelperMembers(Context context, String filePath, InputStream assets_path) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.myContext = context;
+        //defining database path and assigning its path
         pathToSaveDBFile = new StringBuffer(filePath).append("/").append(DATABASE_NAME).toString();
         database_assets = assets_path;
-//defining database path and assigning its path
     }
 
     public void prepareDatabase() throws IOException {
@@ -50,7 +55,6 @@ public class DatabaseHelperMembers extends SQLiteOpenHelper {
         } else {
             try {
                 copyDataBase();
-//function defined below
             } catch (IOException e) {
                 Log.e(TAG, e.getMessage());
             }
@@ -71,8 +75,8 @@ public class DatabaseHelperMembers extends SQLiteOpenHelper {
     private void copyDataBase() throws IOException {
         OutputStream os = new FileOutputStream(pathToSaveDBFile);
         Log.i(TAG, "inputstream : " + database_assets);
+        //getting database to inputstream from asset folder
         InputStream is = database_assets;
-//getting database to inputstream from asset folder
         byte[] buffer = new byte[1024];
         int length;
         while ((length = is.read(buffer)) > 0) {
@@ -101,15 +105,15 @@ public class DatabaseHelperMembers extends SQLiteOpenHelper {
     }
 
     public ArrayList<MembersModule> getMembersModule() {
+        //access database file
         SQLiteDatabase db = SQLiteDatabase.openDatabase(pathToSaveDBFile, null, SQLiteDatabase.OPEN_READONLY);
-//access database file 
+        //accessing column elements from table kdfdatatable
         String query = "SELECT id, name, address, phone, amount FROM kdfdatatable";
-//accessing column elements from table kdfdatatable
         Cursor cursor = db.rawQuery(query, null);
+        //listing elements in array from table
         ArrayList<MembersModule> list = new ArrayList<MembersModule>();
-//listing elements in array from table
+        //inserting values in object member from database
         while (cursor.moveToNext()) {
-//inserting values in object member from database
             MembersModule member = new MembersModule();
             member.setId(cursor.getInt(0));
             member.setName(cursor.getString(1));
@@ -124,8 +128,8 @@ public class DatabaseHelperMembers extends SQLiteOpenHelper {
 
     private int getVersionId() {
         SQLiteDatabase db = SQLiteDatabase.openDatabase(pathToSaveDBFile, null, SQLiteDatabase.OPEN_READONLY);
+        //access version of current database defined in table on asset folder
         String query = "SELECT version_id FROM dbVersion";
-//access version of current database defined in table on asset folder
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToNext();
         int v = cursor.getInt(0);

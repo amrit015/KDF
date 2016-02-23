@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 /**
  * Created by Amrit on 2/4/2016.
+ * This class is a custom adapter which is used to populate the title drawer and inflate with the corresponding
+ * drawer name and images.
  */
 public class DrawerTitleAdapter extends BaseAdapter {
     private final String[] drawerItemsArray;
@@ -53,7 +55,9 @@ public class DrawerTitleAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        //setting names of the drawer items
         holder.drawerText.setText(drawerItemsArray[position]);
+        //setting images to the left of the title
         holder.drawerIcons.setImageResource(drawerIconsArray.getResourceId(position, -1));
         return convertView;
     }

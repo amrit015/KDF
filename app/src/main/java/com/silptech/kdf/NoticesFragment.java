@@ -31,6 +31,7 @@ import java.util.HashMap;
 
 /**
  * Created by Amrit on 2/4/2016.
+ * This fragment displays the notices in cardview after parsing xml from the blog.
  */
 public class NoticesFragment extends android.support.v4.app.Fragment {
 
@@ -159,6 +160,7 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                 progressDialog.dismiss();
                 progressBar.setVisibility(View.GONE);
                 try {
+                    //repopulating with updated list item
                     mAdapter = new MyRecyclerViewAdapter(getDataSet());
                     mRecyclerView.setAdapter(mAdapter);
                 } catch (IOException e) {

@@ -1,5 +1,6 @@
 package com.silptech.kdf;
 
+import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -142,8 +143,12 @@ public class MainActivity extends AppCompatActivity {
                 fm = new NotesFragment();
                 break;
             case 4:
+                fm = new CommitteeFragment();
+                break;
+            case 5:
                 fm = new AboutUsFragment();
                 break;
+
             default:
                 break;
         }

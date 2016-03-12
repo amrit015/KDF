@@ -10,6 +10,7 @@
         <item>Notices</item>
         <item>Members</item>
         <item>Notes</item>
+        <item>Committee</item>
         <item>Contact Us</item>
     </string-array>
 
@@ -20,6 +21,7 @@
         <item>@drawable/ic_info_black_24dp</item>
         <item>@drawable/ic_contacts_black_24dp</item>
         <item>@drawable/ic_note_add_black_24dp</item>
+        <item>@drawable/ic_assistant_black_24dp</item>
         <item>@drawable/ic_group_black_24dp</item>
 
     </string-array>
@@ -70,6 +72,13 @@
     <string name="regionalContactTwoNumber">9842022264</string>
     <string name="regionalContactThreeName">Nabin Koirala</string>
     <string name="regionalContactThreeNumber">9852030671</string>
+
+    <!-- Committee tabs title -->
+    <string-array name="CommitteeTabs">
+        <item>Kendriya Sadasya</item>
+        <item>Sallahkar Samiti</item>
+        <item>Tanki Sinwari Sadasya</item>
+    </string-array>
 
     <!-- Text for displaying toast to user on crash -->
     <string name="crash_toast_text">Ooooops ! I crashed, but a report can be sent to my developer

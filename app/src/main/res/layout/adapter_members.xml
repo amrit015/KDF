@@ -5,13 +5,6 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/member_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ID"
-        android:visibility="gone" />
-
     <LinearLayout
         android:id="@+id/layout_name"
         android:layout_width="wrap_content"
@@ -20,11 +13,11 @@
 
         <TextView
             android:id="@+id/member_name"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="name" />
+            android:text="name"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
 
     </LinearLayout>
 
@@ -54,8 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_address"
-        android:visibility="gone"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
 
         <TextView
@@ -71,12 +64,32 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_address"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Member Number : " />
+
+        <TextView
+            android:id="@+id/member_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layout_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_amount"
-        android:paddingTop="5dp"
-        android:orientation="horizontal">
+        android:layout_below="@+id/layout_number"
+        android:orientation="horizontal"
+        android:paddingTop="5dp">
 
 
         <TextView
@@ -89,16 +102,16 @@
             android:id="@+id/member_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="phone"
             android:textColor="@color/logo_colour_dark"
-            android:textSize="15dp"
-            android:text="phone" />
+            android:textSize="15dp" />
 
         <ImageView
+            android:id="@+id/member_call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_phone_black_24dp"
-            android:id="@+id/member_call"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:src="@drawable/ic_phone_black_24dp" />
 
     </LinearLayout>
 </RelativeLayout>

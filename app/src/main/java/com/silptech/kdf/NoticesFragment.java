@@ -73,7 +73,6 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -87,6 +86,7 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
             super.onPreExecute();
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Loading Notices");
+            progressDialog.setCancelable(false);
             progressDialog.show();
         }
 
@@ -123,15 +123,12 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                             map.put(KEY_PUBDATE, parser.getValue(e, KEY_PUBDATE));
                             // adding HashList to ArrayList
                             menuItems.add(map);
-//                String a = menuItems.get(i).get(KEY_ITEM);
                             String b = menuItems.get(i).get(KEY_TITLE);
                             String c = menuItems.get(i).get(KEY_PUBDATE);
 
                             // adding HashList to ArrayList
                             folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notices");
                             folder.mkdirs();
-                            Log.i(TAG, "aayeko kuro : " + b);
-                            Log.i(TAG, "aayeko kuro : " + c);
                             String toFile = ("#" + b + "##" + KEY_AUTHOR + "###" + c + "####");
                             Log.i(TAG, "toFile length : " + toFile.length());
                             CacheNotification.writeFile(filename, toFile, folder);

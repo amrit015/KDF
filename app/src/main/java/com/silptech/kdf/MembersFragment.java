@@ -2,9 +2,9 @@ package com.silptech.kdf;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import com.silptech.kdf.Utils.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.silptech.kdf.Utils.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +28,7 @@ import java.util.ArrayList;
  */
 public class MembersFragment extends android.support.v4.app.Fragment {
 
-    private final static String TAG = "MainActivity";
+    private final static String TAG = "MembersFragment";
     DatabaseHelperMembers dbHelper = null;
     Context context;
     ListView listView;
@@ -34,6 +36,8 @@ public class MembersFragment extends android.support.v4.app.Fragment {
     MembersAdapter adapter;
     File folder;
     InputStream assets_path;
+    int previousPosition = 0;
+    int newPosition;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_members, container, false);
@@ -93,7 +97,6 @@ public class MembersFragment extends android.support.v4.app.Fragment {
         listView.setAdapter(adapter);
     }
 
-
     //search functionality(menu/toolbar)
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -117,5 +120,25 @@ public class MembersFragment extends android.support.v4.app.Fragment {
     private void Search() {
         Intent intent = new Intent(getActivity(), SeachQueryActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        previousPosition = sharedPreferences.getInt("last_position", 0);
+        Log.i(TAG, "last position :" + previousPosition);
+        //returning listview to scroll to the position saved previously while closing the fragment
+        listView.setSelectionFromTop(previousPosition, 0);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        newPosition = listView.getFirstVisiblePosition();
+        SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
+        editor.putInt("last_position", newPosition);
+        editor.apply();
+        Log.i(TAG, "new position :" + newPosition);
     }
 }

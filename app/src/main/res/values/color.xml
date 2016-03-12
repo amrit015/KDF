@@ -9,7 +9,7 @@
     <item name="tab_underline" type="color">#ff000000</item>
     <item name="white" type="color">#FFFFFF</item>
     <item name="light" type="color">#ffe0e0e0</item>
-    <item name="lighter" type="color">#dddcdc</item>
+    <item name="lighter" type="color">#eae8e8</item>
     <item name="tab_inactive_color" type="color">#6c252525</item>
     <item name="black" type="color">#000000</item>
     <item name="underline_view" type="color">#4ebbbbbb</item>

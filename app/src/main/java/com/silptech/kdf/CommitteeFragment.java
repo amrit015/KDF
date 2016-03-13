@@ -15,6 +15,7 @@ import com.silptech.kdf.Utils.Log;
 
 /**
  * Created by Amrit on 3/12/2016.
+ * Fragment for Committee drawer. Tabs are initialized here.
  */
 public class CommitteeFragment extends android.support.v4.app.Fragment {
     private static final String TAG = "CommitteeFragment";
@@ -44,6 +45,7 @@ public class CommitteeFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    // tabs initialization adapter
     private class CommitteeTabsPagerAdapter extends FragmentStatePagerAdapter {
         Context context;
 

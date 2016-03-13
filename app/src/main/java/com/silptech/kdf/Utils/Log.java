@@ -5,7 +5,7 @@ package com.silptech.kdf.Utils;
  * Custom Log class.
  */
 public class Log {
-    private static boolean isLogEnabled = true;     // make false to disable
+    private static boolean isLogEnabled = false;     // make false to disable
     public static void i(String TAG, String message) {
 
         if (isLogEnabled) {

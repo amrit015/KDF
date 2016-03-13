@@ -66,7 +66,6 @@ public class CommitteeAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.NAME.setText(Html.fromHtml(newList.get(position).getName()).toString());
-        Log.i(TAG, "name :" + newList.get(position).getName());
         holder.POST.setText(Html.fromHtml("(" + newList.get(position).getPost()).toString() + ")");
         holder.PHONE.setText(Html.fromHtml(String.valueOf(newList.get(position).getPhone())).toString());
         holder.CELL.setText(Html.fromHtml(String.valueOf(newList.get(position).getCell())).toString());
@@ -84,12 +83,6 @@ public class CommitteeAdapter extends BaseAdapter {
                 CallDial.PhoneDialer(context, cellCall);
             }
         });
-        if (newList.get(position).getPhone().equals("")){
-            holder.phoneLayout.setVisibility(View.GONE);
-        }
-        if (newList.get(position).getCell().equals("")){
-            holder.cellLayout.setVisibility(View.GONE);
-        }
         return convertView;
     }
 

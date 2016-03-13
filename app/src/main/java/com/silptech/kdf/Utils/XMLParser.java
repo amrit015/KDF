@@ -1,7 +1,5 @@
 package com.silptech.kdf.Utils;
 
-import android.util.Log;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -92,8 +90,6 @@ public class XMLParser {
 
     /**
      * Getting XML DOM element
-     *
-     * @param XML string
      */
     public Document getDomElement(String xml) {
         Document doc = null;
@@ -141,9 +137,6 @@ public class XMLParser {
 
     /**
      * Getting node value
-     *
-     * @param Element node
-     * @param key     string
      */
     public String getValue(Element item, String str) {
         NodeList n = item.getElementsByTagName(str);

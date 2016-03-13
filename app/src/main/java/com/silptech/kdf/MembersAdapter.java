@@ -62,6 +62,7 @@ public class MembersAdapter extends BaseAdapter {
             holder.AMOUNT = (TextView) convertView.findViewById(R.id.member_amount);
             holder.CALL = (ImageView) convertView.findViewById(R.id.member_call);
             holder.phoneLayout = (LinearLayout) convertView.findViewById(R.id.layout_phone);
+            holder.addressLayout = (LinearLayout) convertView.findViewById(R.id.layout_address);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -78,9 +79,6 @@ public class MembersAdapter extends BaseAdapter {
                 CallDial.PhoneDialer(context, phoneCall);
             }
         });
-        if (newList.get(position).getPhone().equals("")){
-            holder.phoneLayout.setVisibility(View.GONE);
-        }
         return convertView;
     }
 
@@ -92,5 +90,6 @@ public class MembersAdapter extends BaseAdapter {
         TextView AMOUNT;
         ImageView CALL;
         LinearLayout phoneLayout;
+        LinearLayout addressLayout;
     }
 }

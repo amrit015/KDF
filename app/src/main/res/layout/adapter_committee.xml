@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="20dp">
 
-            <TextView
+            <com.silptech.kdf.UnderLineTextView
                 android:id="@+id/committee_cell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,12 +51,6 @@
                 android:textColor="@color/logo_colour_dark"
                 android:textSize="15dp" />
 
-            <ImageView
-                android:id="@+id/committee_cell_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:src="@drawable/ic_phone_black_24dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -65,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/layout_committee_cell">
 
-            <TextView
+            <com.silptech.kdf.UnderLineTextView
                 android:id="@+id/committee_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,12 +67,6 @@
                 android:textColor="@color/logo_colour_dark"
                 android:textSize="15dp" />
 
-            <ImageView
-                android:id="@+id/committee_phone_call"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:src="@drawable/ic_phone_black_24dp" />
         </LinearLayout>
 
     </RelativeLayout>

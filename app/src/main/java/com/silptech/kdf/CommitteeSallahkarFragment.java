@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Amrit on 3/12/2016.
+ * ChildFragment for Sallahkar Samiti
  */
 public class CommitteeSallahkarFragment extends Fragment {
 
@@ -41,6 +42,7 @@ public class CommitteeSallahkarFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //defining database path to save in storage
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Database");
         folder.mkdirs();
         DATABASE_NAME = "sallakardata.db";
@@ -69,7 +71,7 @@ public class CommitteeSallahkarFragment extends Fragment {
             CommitteeModule committeeModule = new CommitteeModule();
             committeeModule.setName(name);
             committeeModule.setPost(post);
-            committeeModule.setPhone("0" + phone);
+            committeeModule.setPhone(phone);
             committeeModule.setCell(cell);
             committeeList.add(committeeModule);
         }

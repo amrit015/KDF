@@ -77,7 +77,7 @@
     <string-array name="CommitteeTabs">
         <item>Kendriya Sadasya</item>
         <item>Sallahkar Samiti</item>
-        <item>Tanki Sinwari Sadasya</item>
+        <item>Tanki Sinwari Samiti</item>
     </string-array>
 
     <!-- Text for displaying toast to user on crash -->

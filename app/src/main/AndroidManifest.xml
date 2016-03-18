@@ -26,11 +26,11 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
-        android:name="com.silptech.kdf.Utils.AcraErrorReport"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:launchMode="singleTop"
         android:theme="@style/AppTheme">
 
         <activity
@@ -60,8 +60,9 @@
 
         <activity
             android:name=".MainActivity"
+            android:allowBackup="true"
             android:alwaysRetainTaskState="true"
-            android:configChanges="orientation|screenSize|screenLayout"
+            android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">

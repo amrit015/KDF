@@ -9,7 +9,6 @@ import android.os.Environment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.silptech.kdf.Utils.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import android.widget.Toast;
 
 import com.silptech.kdf.Utils.CacheNotification;
 import com.silptech.kdf.Utils.InternetCheck;
+import com.silptech.kdf.Utils.Log;
 import com.silptech.kdf.Utils.XMLParser;
 
 import org.w3c.dom.Document;
@@ -96,26 +96,19 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                 //checking if internet is available and only parsing when avialable
                 if (InternetCheck.hasInternet(getActivity())) {
                     XMLParser parser = new XMLParser();
-                    String xml = parser.getXmlFromUrl(url);
+                    String xml = XMLParser.getXmlFromUrl(url);
                     int statusCodeXML = XMLParser.statusCode;
                     Log.i(TAG, " status code : " + statusCodeXML);
                     if (statusCodeXML == 200) {
+                        //deleting cache and parsing all notices again if connected to internet
+                        deleteCache();
                         Log.i(TAG, "Coming from status code 200");
-                        int savedNodeLength = 0;
                         Document doc = parser.getDomElement(xml); // getting DOM element
                         NodeList nl = doc.getElementsByTagName(KEY_ITEM);
-                        if (folder.list().length > 0) {
-                            SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-                            savedNodeLength = sharedPreferences.getInt("last_xml_node", 0);
-                        }
-                        // looping through all item nodes <item>
                         Log.i(TAG, "nl ko length:" + nl.getLength());
-                        Log.i(TAG, "sharePref ko length:" + savedNodeLength);
-                        //the new input data will always have the tag from 0 i.e. ascending order
-                        for (int i = 0; i < (nl.getLength() - savedNodeLength); i++) {
+                        for (int i = 0; i < (nl.getLength()); i++) {
                             int y = folder.list().length;
                             filename = xfileName + y;
-                            //save value on shared Preference and only execute y > nl.getLength() after 1st execution
                             Element e = (Element) nl.item(i);
                             // adding each child node to HashMap key => value
                             map.put(KEY_ITEM, parser.getValue(e, KEY_ITEM));
@@ -125,16 +118,10 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                             menuItems.add(map);
                             String b = menuItems.get(i).get(KEY_TITLE);
                             String c = menuItems.get(i).get(KEY_PUBDATE);
-
-                            // adding HashList to ArrayList
-                            folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notices");
-                            folder.mkdirs();
                             String toFile = ("#" + b + "##" + KEY_AUTHOR + "###" + c + "####");
                             Log.i(TAG, "toFile length : " + toFile.length());
+                            //caching to storage to view for offline
                             CacheNotification.writeFile(filename, toFile, folder);
-                            SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
-                            editor.putInt("last_xml_node", nl.getLength());
-                            editor.apply();
                         }
                     }
                 } else {
@@ -167,6 +154,17 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    //deleting cache
+    private void deleteCache() {
+        File dir = new File(Environment.getExternalStorageDirectory() + "/KDF/Notices");
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                new File(dir, children[i]).delete();
+            }
+        }
+    }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -176,7 +174,7 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
     public ArrayList<CacheModule> getDataSet() throws IOException {
         noticesArray = new ArrayList();
 
-        for (int i = 0; i < folder.list().length; i++) {
+        for (int i = 0; i <(folder.list().length); i++) {
             notification_cache = CacheNotification.readFile((xfileName + i), folder);
             if (notification_cache != "") {
                 int a = notification_cache.indexOf("#");
@@ -190,7 +188,7 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                 CacheModule cacheModule = new CacheModule();
                 cacheModule.setMessage(message_string);
                 cacheModule.setAuthor(author_string);
-                cacheModule.setDate(date_string);
+                cacheModule.setDate(date_string.substring(0,16));
                 noticesArray.add(cacheModule);
             }
         }

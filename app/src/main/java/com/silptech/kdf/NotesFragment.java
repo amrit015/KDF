@@ -205,6 +205,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
 
     //after NoticesAddActivity is closed, the results are obtained from NoticesAddActivity and corresponding action is taken
     //the recyclerview is repopulated from the updated arraylist
+	
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

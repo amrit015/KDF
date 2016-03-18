@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-import java.util.Calendar;
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * This is an activity for getting and displaying the new notification.
@@ -32,12 +33,13 @@ public class Notification extends AppCompatActivity {
         if (null != extras && this.getIntent().getExtras().containsKey("message") && this.getIntent().getExtras().containsKey("author")) {
             message_string = extras.getString("message").toString();
             author_string = extras.getString("author").toString();
-            date_string = String.valueOf(Calendar.getInstance().getTime());
-
+            Date date = new Date();
+            String stringDate = DateFormat.getDateTimeInstance().format(date);
             newNoticeMessage.setText(message_string);
             newNoticeAuthor.setText(author_string);
-            newNoticeDate.setText(date_string);
+            newNoticeDate.setText(stringDate);
         }
+
     }
 
     //starting the application on backpressed

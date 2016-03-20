@@ -3,11 +3,12 @@ package com.silptech.kdf;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import com.silptech.kdf.Utils.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.silptech.kdf.Utils.Log;
 
 import java.util.ArrayList;
 
@@ -19,11 +20,12 @@ import java.util.ArrayList;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.NoticesHolder> {
     private ArrayList<CacheModule> mDataset;
     private static String LOG_TAG = "MyRecyclerViewAdapter";
-    CardView cardView;
     Context context;
     private String title;
     private String notes;
     private int position;
+    DatabaseHelperNotes db;
+    CacheModule cacheModule;
 
     public class NoticesHolder extends RecyclerView.ViewHolder {
 
@@ -32,6 +34,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView noticeDate;
         TextView noteTitle;
         TextView noteContents;
+        CardView cardView;
 
         public NoticesHolder(View itemView) {
             super(itemView);
@@ -60,7 +63,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(final NoticesHolder holder, final int position) {
-        CacheModule cacheModule = mDataset.get(position);
+        cacheModule = mDataset.get(position);
         if (cacheModule.getMessage() != "") {
             holder.noticeMessage.setText(cacheModule.getMessage());
             holder.noticeAuthor.setText(cacheModule.getAuthor());
@@ -71,7 +74,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             holder.noteTitle.setVisibility(View.VISIBLE);
             holder.noteContents.setVisibility(View.VISIBLE);
         } else {
-            cardView.setVisibility(View.GONE);
+            holder.cardView.setVisibility(View.GONE);
         }
         //saving title,notes and position of each cards for contextmenu
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

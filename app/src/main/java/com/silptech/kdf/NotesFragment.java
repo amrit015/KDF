@@ -9,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.silptech.kdf.Utils.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -19,6 +18,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.silptech.kdf.Utils.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -151,7 +152,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
     //onclick listener for dialog save and cancel textviews
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.update_save:
                 try {
                     DialogUpdateNote(title);
@@ -171,12 +172,12 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
         cacheModule = new CacheModule();
         cacheModule.title = dialogNotesTitle.getText().toString();
         cacheModule.notes = dialogNotesContent.getText().toString();
-        db.updateNotes(cacheModule,title);
+        db.updateNotes(cacheModule, title);
         mAdapter.notifyItemChanged(position);
         mAdapter.notifyDataSetChanged();
         mAdapter = new MyRecyclerViewAdapter(getDataSet());
         mRecyclerView.setAdapter(mAdapter);
-        Toast.makeText(getActivity(),"Successfully Edited",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Successfully Edited", Toast.LENGTH_SHORT).show();
         dialog.dismiss();
     }
 
@@ -184,8 +185,8 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
     private void removeItem(String title, int position) {
         memoArray.remove(position);
         db.removeNotes(title);
+        mAdapter.notifyDataSetChanged();
         Log.i(TAG, "getTitle : " + title);
-        mAdapter.notifyItemRemoved(position);
     }
 
     public ArrayList getDataSet() throws IOException {
@@ -205,7 +206,6 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
 
     //after NoticesAddActivity is closed, the results are obtained from NoticesAddActivity and corresponding action is taken
     //the recyclerview is repopulated from the updated arraylist
-	
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,10 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
     static final String KEY_ITEM = "item"; // parent node
     static final String KEY_TITLE = "title";
     static final String KEY_PUBDATE = "pubDate";
+
+    //added part
+    static final String KEY_DESCRIPTION = "description";
+
     ArrayList<HashMap<String, String>> menuItems = new ArrayList<HashMap<String, String>>();
     HashMap<String, String> map = new HashMap<String, String>();
     String url = "http://kdfpost.blogspot.com/feeds/posts/default?alt=rss";
@@ -114,11 +119,24 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                             map.put(KEY_ITEM, parser.getValue(e, KEY_ITEM));
                             map.put(KEY_TITLE, parser.getValue(e, KEY_TITLE));
                             map.put(KEY_PUBDATE, parser.getValue(e, KEY_PUBDATE));
+
+                            //added part
+                            map.put(KEY_DESCRIPTION, parser.getValue(e, KEY_DESCRIPTION));
+
+
                             // adding HashList to ArrayList
                             menuItems.add(map);
+                            String d=menuItems.get(i).get(KEY_DESCRIPTION);
                             String b = menuItems.get(i).get(KEY_TITLE);
                             String c = menuItems.get(i).get(KEY_PUBDATE);
-                            String toFile = ("#" + b + "##" + KEY_AUTHOR + "###" + c + "####");
+                            //String toFile = ("#" + b + "##" + KEY_AUTHOR + "###" + c + "####");
+
+                            String toFile = ("#" + d + "##" + b + "###" + c + "####");
+
+                            //added part
+                            Log.i(TAG, "description:" + d);
+
+
                             Log.i(TAG, "toFile length : " + toFile.length());
                             //caching to storage to view for offline
                             CacheNotification.writeFile(filename, toFile, folder);
@@ -186,8 +204,8 @@ public class NoticesFragment extends android.support.v4.app.Fragment {
                 author_string = notification_cache.substring(b + 2, c);
                 date_string = notification_cache.substring(c + 3, d);
                 CacheModule cacheModule = new CacheModule();
-                cacheModule.setMessage(message_string);
-                cacheModule.setAuthor(author_string);
+                cacheModule.setMessage(String.valueOf(Html.fromHtml(message_string)));
+                cacheModule.setAuthor(String.valueOf(Html.fromHtml(author_string)));
                 cacheModule.setDate(date_string.substring(0,16));
                 noticesArray.add(cacheModule);
             }

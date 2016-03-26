@@ -24,18 +24,18 @@
 
             <TextView
                 android:id="@+id/notices_message"
+                android:autoLink="phone|email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="15dp"
-                android:layout_alignParentTop="true" />
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/notices_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/notices_message"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="0dp" />
 
             <TextView
                 android:id="@+id/notices_date"

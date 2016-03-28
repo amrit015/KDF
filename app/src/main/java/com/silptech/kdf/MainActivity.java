@@ -57,15 +57,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //neeeded to restore the app after pressing home button
-        if (!isTaskRoot()) {
-            final Intent intent = getIntent();
-            final String intentAction = intent.getAction();
-            if (intent.hasCategory(Intent.CATEGORY_LAUNCHER) && intentAction != null && intentAction.equals(Intent.ACTION_MAIN)) {
-                finish();
-                return;
-            }
-        }
         //pushbots library initialization
         Pushbots.sharedInstance().init(this);
         //setting up titles for drawers
@@ -231,5 +222,11 @@ public class MainActivity extends AppCompatActivity {
                     + getApplicationContext().getPackageName())));
         }
         Log.i(TAG, "Package Name : " + getApplicationContext().getPackageName());
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
     }
 }

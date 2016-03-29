@@ -73,6 +73,9 @@
     <string name="regionalContactThreeName">Nabin Koirala</string>
     <string name="regionalContactThreeNumber">9852030671</string>
 
+    //facebook app id
+    <string name="facebook_app_id">183894195330052</string>
+
     <!-- Committee tabs title -->
     <string-array name="CommitteeTabs">
         <item>Kendriya Sadasya</item>

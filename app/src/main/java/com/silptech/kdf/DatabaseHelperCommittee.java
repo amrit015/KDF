@@ -34,7 +34,7 @@ public class DatabaseHelperCommittee extends SQLiteOpenHelper {
         //defining database path and assigning its path
         pathToSaveDBFile = new StringBuffer(filePath).append("/").append(DATABASE_NAME).toString();
         database_assets = assets_path;
-        this.DATABASE_TABLE = DATABASE_TABLE;
+        DatabaseHelperCommittee.DATABASE_TABLE = DATABASE_TABLE;
     }
 
     public void copyDataBase() throws IOException {

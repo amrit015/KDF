@@ -17,15 +17,11 @@ public class InternetCheck {
     }
 
     public static boolean hasInternet(Context context) {
-        cManager = (ConnectivityManager) context.getSystemService(internetContext.CONNECTIVITY_SERVICE);
+        cManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         wifi = cManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         data = cManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-        if ((wifi != null & data != null) && (wifi.isConnected() || data.isConnected())
-                && (wifi.isAvailable() || data.isAvailable())) {
-            return true;
-        } else {
-            return false;
-        }
+        return (wifi != null & data != null) && (wifi.isConnected() || data.isConnected())
+                && (wifi.isAvailable() || data.isAvailable());
     }
 }

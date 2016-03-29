@@ -3,6 +3,8 @@ package com.silptech.kdf;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +21,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.silptech.kdf.Utils.Log;
 
 import java.io.File;
@@ -50,12 +56,20 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
     String title;
     String notes;
     int position;
+    //facebook share method initialization
+    CallbackManager callbackManager;
+    ShareDialog shareDialog;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notes, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notes");
         folder.mkdirs();
+
+        //facebook sdk initialization
+        FacebookSdk.sdkInitialize(getActivity());
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floating_button_add_notes);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +105,8 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.add(0, v.getId(), 0, "Edit");
         menu.add(0, v.getId(), 0, "Delete");
-        menu.add(0, v.getId(), 0, "Share");
+        menu.add(0, v.getId(), 0, "Share via");
+        menu.add(0, v.getId(), 0, "Share via Facebook");
         menu.add(0, v.getId(), 0, "Cancel");
     }
 
@@ -114,12 +129,48 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
             editItem(title, notes);
         } else if (item.getTitle() == "Delete") {
             removeItem(title, position);
-        } else if (item.getTitle() == "Share") {
+        } else if (item.getTitle() == "Share via") {
             shareItem(title, notes);
+        } else if (item.getTitle() == "Share via Facebook") {
+            shareItemFacebook(title, notes);
         } else {
             item.collapseActionView();
         }
         return super.onContextItemSelected(item);
+    }
+
+    private void shareItemFacebook(String title, String notes) {
+        String urlToShare = "http://www.google.com";
+        // See if official Facebook app is found
+        boolean facebookAppFound = appInstalledOrNot("com.facebook.katana");
+        // As fallback if no facebook is installed, launch sharer.php in a browser
+        if (!facebookAppFound) {
+            String sharerUrl = "https://www.facebook.com/sharer/sharer.php?u=" + urlToShare;
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
+            startActivity(intent);
+        } else {
+            if (ShareDialog.canShow(ShareLinkContent.class)) {
+                ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                        .setContentTitle(title)
+                        .setContentDescription("Notes : " + notes)
+                        .setContentUrl(Uri.parse("www.facebook.com"))
+                        .build();
+                shareDialog.show(linkContent);
+            }
+        }
+    }
+
+    //checking whether facebook app is installed
+    private boolean appInstalledOrNot(String uri) {
+        PackageManager pm = getActivity().getPackageManager();
+        boolean app_installed;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
     }
 
     //share functionality
@@ -218,5 +269,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
                 e.printStackTrace();
             }
         }
+        // facebook share callback
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

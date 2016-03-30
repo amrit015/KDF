@@ -140,7 +140,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
     }
 
     private void shareItemFacebook(String title, String notes) {
-        String urlToShare = "http://www.google.com";
+        String urlToShare = "www.facebook.com";
         // See if official Facebook app is found
         boolean facebookAppFound = appInstalledOrNot("com.facebook.katana");
         // As fallback if no facebook is installed, launch sharer.php in a browser
@@ -153,7 +153,7 @@ public class NotesFragment extends android.support.v4.app.Fragment implements Vi
                 ShareLinkContent linkContent = new ShareLinkContent.Builder()
                         .setContentTitle(title)
                         .setContentDescription("Notes : " + notes)
-                        .setContentUrl(Uri.parse("www.facebook.com"))
+                        .setContentUrl(Uri.parse(urlToShare))
                         .build();
                 shareDialog.show(linkContent);
             }

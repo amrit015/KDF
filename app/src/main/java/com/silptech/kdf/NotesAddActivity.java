@@ -28,6 +28,7 @@ public class NotesAddActivity extends AppCompatActivity {
     File folder;
     DatabaseHelperNotes db;
     CacheModule CacheModule;
+    String previousTitletext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class NotesAddActivity extends AppCompatActivity {
         notesContent = (EditText) findViewById(R.id.memo_add_contents);
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Notes");
         folder.mkdirs();
+        db = new DatabaseHelperNotes(folder, getApplicationContext());
         ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE))
                 .showSoftInput(notesTitle, InputMethodManager.SHOW_FORCED);
         Log.i(TAG, "folder : " + folder);
@@ -91,27 +93,30 @@ public class NotesAddActivity extends AppCompatActivity {
     //saving title and notes to the database
     private void onSavedNote() {
         if ((notesTitleText.length() > 0) && (notesContentText.length() > 0)) {
-            db = new DatabaseHelperNotes(folder, getApplicationContext());
-            CacheModule = new CacheModule();
-            CacheModule.title = notesTitleText;
-            CacheModule.notes = notesContentText;
-            db.addNotes(CacheModule);
-            Toast.makeText(getApplicationContext(), "Notes successfully saved", Toast.LENGTH_SHORT).show();
+            if (!notesTitleText.equals(previousTitletext)) {
+                CacheModule = new CacheModule();
+                CacheModule.title = notesTitleText;
+                CacheModule.notes = notesContentText;
+                db.addNotes(CacheModule);
+                Toast.makeText(getApplicationContext(), "Notes successfully saved", Toast.LENGTH_SHORT).show();
+                this.finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "Previous note already has the same title. Choose different title to save the note", Toast.LENGTH_SHORT
+                ).show(); }
         }
-        this.finish();
     }
 
     //getting text from edittext
     private void onGetText() {
         notesTitleText = notesTitle.getText().toString();
         notesContentText = notesContent.getText().toString();
+        previousTitletext = db.checkNote(notesTitleText);
         Log.i(TAG, "title : " + notesTitleText);
     }
 
     //on pressing back, notes are saved
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         onGetText();
         onSavedNote();
     }

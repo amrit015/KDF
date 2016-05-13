@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingLeft="15dp"
+        android:text="Featured App"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:text="Check out apps from SilpTech"
+        android:textSize="13dp"
+        android:paddingBottom="7dp"
+        android:textStyle="italic" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:focusable="true"
+        card_view:cardBackgroundColor="@drawable/cardview_select"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="2dp"
+        card_view:contentPadding="2dp">
+
+        <LinearLayout
+            android:id="@+id/card_main"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/layout_click_background"
+            android:padding="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:src="@mipmap/ne"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:paddingBottom="2dp"
+                android:paddingLeft="5dp"
+                android:text="Nepali Entertainment" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/black_light"
+                android:text="Browse popular and latest Nepali and Global YouTube videos in an organized way." />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black_light"
+                android:text="Get updated with the contents that matters to you. Watch music videos, trailers, movies, documentaries, pranks, trending and many more videos in an organized way with just a few clicks. Watch the video from where you left previously, this app supports playback of the videos from the previous time. No Ads!." />
+            <TextView
+                android:id="@+id/navigate_playstore_NE"
+                android:padding="3dp"
+                android:textColor="@color/white"
+                android:text="Get it on PlayStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pressed_button"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

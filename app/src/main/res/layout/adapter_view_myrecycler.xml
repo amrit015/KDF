@@ -15,14 +15,16 @@
         android:focusable="true"
         card_view:cardBackgroundColor="@drawable/cardview_select"
         card_view:cardCornerRadius="2dp"
-        card_view:contentPadding="10dp">
+        card_view:contentPadding="2dp">
 
         <RelativeLayout
             android:id="@+id/card_main"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:padding="5dp"
+            android:background="@drawable/layout_click_background">
 
-            <TextView
+        <TextView
                 android:id="@+id/notices_message"
                 android:autoLink="phone|email"
                 android:layout_width="wrap_content"

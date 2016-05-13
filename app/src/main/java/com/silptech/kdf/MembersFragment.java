@@ -11,7 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.silptech.kdf.Utils.Log;
 
@@ -38,10 +43,30 @@ public class MembersFragment extends android.support.v4.app.Fragment {
     InputStream assets_path;
     int previousPosition = 0;
     int newPosition;
+    LinearLayout loginLayout;
+    EditText getUsername, getPassword;
+    Button logIn;
+    String insertedUsername;
+    String insertedPassword;
+    //boolean variable to check user is logged in or not
+    //initially it is false
+    private boolean loggedIn = false;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_members, container, false);
         listView = (ListView) view.findViewById(R.id.listview);
+        loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
+        getUsername = (EditText) view.findViewById(R.id.username);
+        getPassword = (EditText) view.findViewById(R.id.password);
+        logIn = (Button) view.findViewById(R.id.login);
+        logIn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                login();
+            }
+
+        });
         folder = new File(Environment.getExternalStorageDirectory().toString() + "/KDF/Database");
         folder.mkdirs();
 
@@ -54,8 +79,36 @@ public class MembersFragment extends android.support.v4.app.Fragment {
         } catch (IOException e) {
             Log.e(TAG, e.getMessage());
         }
-        getData();
         return view;
+    }
+
+    private void login() {
+        //Getting values from edit text
+        insertedUsername = getUsername.getText().toString();
+        insertedPassword = getPassword.getText().toString();
+
+        if (insertedUsername.equals("") || insertedPassword.equals("")) {
+            Toast.makeText(getActivity(), "Empty username or code", Toast.LENGTH_SHORT).show();
+        } else {
+            if (insertedUsername.equals("kdfadmin") && insertedPassword.equals("kdfauth123")) {
+                loginLayout.setVisibility(View.GONE);
+                listView.setVisibility(View.VISIBLE);
+
+                //Creating a shared preference
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+                //Creating editor to store values to shared preferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                //Adding values to editor
+                editor.putBoolean("loggedIn", true);
+                //Saving values to editor
+                editor.commit();
+
+                // accessing data
+                getData();
+            } else {
+                Toast.makeText(getActivity(), "Invalid username or code", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -130,6 +183,21 @@ public class MembersFragment extends android.support.v4.app.Fragment {
         Log.i(TAG, "last position :" + previousPosition);
         //returning listview to scroll to the position saved previously while closing the fragment
         listView.setSelectionFromTop(previousPosition, 0);
+
+        //In onresume fetching value from sharedpreference
+        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+
+        //Fetching the boolean value form sharedpreferences
+        loggedIn = sharedPreferences1.getBoolean("loggedIn", false);
+
+        //If we will get true
+        if (loggedIn) {
+            // showing the data
+            loginLayout.setVisibility(View.GONE);
+            listView.setVisibility(View.VISIBLE);
+            // accessing data
+            getData();
+        }
     }
 
     @Override

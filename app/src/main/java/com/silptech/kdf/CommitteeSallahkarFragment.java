@@ -33,7 +33,7 @@ public class CommitteeSallahkarFragment extends Fragment {
     ArrayList<CommitteeModule> committeeList = new ArrayList<CommitteeModule>();
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_members, container, false);
+        View view = inflater.inflate(R.layout.fragment_committee_members, container, false);
         listView = (ListView) view.findViewById(R.id.listview);
         getData();
         return view;

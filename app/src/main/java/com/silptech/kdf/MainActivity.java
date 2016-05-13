@@ -2,9 +2,6 @@ package com.silptech.kdf;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -16,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,9 +23,6 @@ import android.widget.RelativeLayout;
 import com.pushbots.push.Pushbots;
 import com.silptech.kdf.Utils.Log;
 import com.silptech.kdf.Utils.StatusBarColor;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /*
     THis is the main activity which opens after SPlash Screen. Here the navigation drawer is defined and populated
@@ -126,8 +119,6 @@ public class MainActivity extends AppCompatActivity {
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            view.setBackgroundColor(getResources().getColor(R.color.material_palette));
-//            view.setSelected(true);
             selectItem(position);
         }
     }
@@ -154,7 +145,9 @@ public class MainActivity extends AppCompatActivity {
             case 5:
                 fm = new AboutUsFragment();
                 break;
-
+            case 6:
+                fm = new FeaturedAppsFragment();
+                break;
             default:
                 break;
         }

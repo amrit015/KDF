@@ -77,6 +77,25 @@ public class DatabaseHelperNotes extends SQLiteOpenHelper {
         return listNotes;
     }
 
+    //getting name of previous notes title
+    public String checkNote(String title) {
+        String noteTitle = "";
+        db = this.getWritableDatabase();
+        // getting time when unique_id gets matched
+        Cursor cursor = db.query(NOTES_TABLE, new String[]{"title"}, "title= ?", new String[]{title}, null, null, null, null);
+        if (cursor.getCount() != 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    noteTitle = cursor.getString(cursor
+                            .getColumnIndex("title"));
+                } while (cursor.moveToNext());
+            }
+        }
+        db.close();
+        cursor.close();
+        return noteTitle;
+    }
+
     public void updateNotes(CacheModule nm, String title) {
         // TODO Auto-generated method stub
         SQLiteDatabase db = this.getWritableDatabase();

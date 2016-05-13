@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.silptech.kdf.Utils.CallDial;
+import com.silptech.kdf.Utils.FacebookOpen;
 import com.silptech.kdf.Utils.MailTo;
 
 /**
@@ -24,7 +25,9 @@ public class DevelopersActivity extends AppCompatActivity implements View.OnClic
     String phA, phB, phC; //phone resources from string
     Context context;
     LinearLayout silptechLayout;
+    LinearLayout silptechFacebook;
     String silptech_email;
+    String facebookId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class DevelopersActivity extends AppCompatActivity implements View.OnClic
         developerC = (TextView) findViewById(R.id.developer_c_name);
         devPhoneC = (ImageView) findViewById(R.id.developer_b_phone);
         silptechLayout = (LinearLayout) findViewById(R.id.silptech_layout);
+        silptechFacebook = (LinearLayout) findViewById(R.id.company_facebook_layout);
 
         //getting string
         devA = getResources().getString(R.string.developer_a);
@@ -43,6 +47,7 @@ public class DevelopersActivity extends AppCompatActivity implements View.OnClic
         devC = getResources().getString(R.string.developer_c);
         phC = getResources().getString(R.string.developer_phone_c);
         silptech_email = getResources().getString(R.string.silptech_email);
+        facebookId = getResources().getString(R.string.silptech_facebook_pageId);
 
         //setting textview on names
         developerA.setText(devA);
@@ -52,6 +57,7 @@ public class DevelopersActivity extends AppCompatActivity implements View.OnClic
         //onclick email and phone
         devPhoneC.setOnClickListener(this);
         silptechLayout.setOnClickListener(this);
+        silptechFacebook.setOnClickListener(this);
 
         //seting visibility of devPhoneB
         devPhoneC.setVisibility(View.VISIBLE);
@@ -65,6 +71,9 @@ public class DevelopersActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.developer_b_phone:
                 CallDial.PhoneDialer(DevelopersActivity.this, phC);
+                break;
+            case R.id.company_facebook_layout:
+                FacebookOpen.receiveFacebookPageId(getApplicationContext(), facebookId);
                 break;
             default:
                 break;

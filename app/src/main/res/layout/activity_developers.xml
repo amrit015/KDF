@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center|top"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
@@ -25,22 +26,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:background="@drawable/layout_click_background"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/developer_silptech"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Silptech"
+            android:textColor="@color/black"
+
             android:textSize="20dp" />
 
         <ImageView
             android:id="@+id/developer_silptech_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp"
+            android:paddingLeft="10dp"
             android:src="@drawable/ic_email_black_24dp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/company_facebook_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_click_background"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facebook Page"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="0dp"
+            android:src="@drawable/ic_action_facebook" />
     </LinearLayout>
 
     <TextView
@@ -86,6 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@drawable/layout_click_background"
         android:padding="3dp">
 
         <TextView

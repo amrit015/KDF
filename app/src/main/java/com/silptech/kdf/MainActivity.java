@@ -1,5 +1,6 @@
 package com.silptech.kdf;
 
+import android.*;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -7,12 +8,14 @@ import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.test.mock.MockPackageManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     Fragment fm;
     Toolbar toolbar;
+    private static final int REQUEST_CODE_PERMISSION = 3;
+    String[] mPermission = {android.Manifest.permission.INTERNET, android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE};
+    boolean permissionCheck = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +78,24 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             StatusBarColor.StatusBarColorChange(this);
         }
+
+        // api 23+ runtime app permission
+        try {
+            if (ActivityCompat.checkSelfPermission(this, mPermission[0])
+                    != MockPackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(this, mPermission[1])
+                            != MockPackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(this, mPermission[2])
+                            != MockPackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(this,
+                        mPermission, REQUEST_CODE_PERMISSION);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //defining drawer items
         /*  drawerItemsArray = new String[]{"Home", "Notices", "Contact","Memo","About Us"}; */
         drawerItemsArray = getResources().getStringArray(R.array.NavItems);
@@ -114,6 +139,26 @@ public class MainActivity extends AppCompatActivity {
             selectItem(0);
         }
     }
+
+    // checking the runtime app permission
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.e("Req Code", "" + requestCode);
+        if (requestCode == REQUEST_CODE_PERMISSION) {
+            if (grantResults.length == 3 &&
+                    grantResults[0] == MockPackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == MockPackageManager.PERMISSION_GRANTED &&
+                    grantResults[2] == MockPackageManager.PERMISSION_GRANTED) {
+
+                // Success Stuff here
+                permissionCheck = true;
+            }
+        } else {
+            permissionCheck = false;
+        }
+    }
+
 
     //onclick item listener for navigation drawer items
     private class DrawerItemClickListener implements android.widget.AdapterView.OnItemClickListener {
